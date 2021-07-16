@@ -60,12 +60,18 @@ class Post
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
+     */
+    private $userLike;
+
     
 
     public function __construct()
     {
         $this->likeUser = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->userLike = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +189,30 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserLike(): Collection
+    {
+        return $this->userLike;
+    }
+
+    public function addUserLike(User $userLike): self
+    {
+        if (!$this->userLike->contains($userLike)) {
+            $this->userLike[] = $userLike;
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(User $userLike): self
+    {
+        $this->userLike->removeElement($userLike);
 
         return $this;
     }
