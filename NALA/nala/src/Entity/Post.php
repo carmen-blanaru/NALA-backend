@@ -27,7 +27,7 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $comment;
+    private $title;
 
     /**
      * @ORM\Column(type="boolean")
@@ -79,14 +79,14 @@ class Post
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getTitle(): ?string
     {
-        return $this->comment;
+        return $this->title;
     }
 
-    public function setComment(string $comment): self
+    public function setTitle(string $title): self
     {
-        $this->comment = $comment;
+        $this->title = $title;
 
         return $this;
     }
