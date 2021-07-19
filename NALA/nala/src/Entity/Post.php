@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -16,16 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
+     * @Groups("user")
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
      */
     private $title;
 
@@ -62,6 +66,8 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
+     * @Groups("user")
+     * 
      */
     private $userLike;
 
