@@ -29,7 +29,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"po"})
+     * @Groups({"post"})
      */
     private $title;
 
