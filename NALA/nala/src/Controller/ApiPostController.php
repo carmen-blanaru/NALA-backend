@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,13 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiPostController extends AbstractController
 {
     /**
-     * @Route("/", name="list")
+     * Retourne tous les posts du site
+     * 
+     * 
+     *  @Route("/", name="list", methods={"GET"})
      */
-    public function index(): Response
+    public function index(PostRepository $postRepository): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ApiPostController.php',
-        ]);
+        $Post = $postRepository->findAll();
+        // dd($Post);
+        return $this->json($Post,200,[],[
+                'groups' => 'post'
+            ]);
     }
 }
