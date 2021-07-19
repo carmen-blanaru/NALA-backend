@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Nouvel Utilisateur
+{% endblock %}
+
+{% block content%}
+	<h1> Enregistrer un nouvel utilisateur </h1>
+
+	{{ include('admin/user/_form.html.twig') }}
+
+	<a href="{{ path('admin_user_list') }}"> Retour à la liste </a>
+{% endblock %}

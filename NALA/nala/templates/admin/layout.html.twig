@@ -4,7 +4,7 @@
 
 {% block body %}
 
-
+<!--  this part will be on the all pages of the backoffice, on the left side, it behaves like a navigation bar-->
 <div class="container">
 		<div class="row">
 			<aside class="col-sm-3 mt-4">
@@ -17,6 +17,7 @@
 				</div>
 			</aside>
 
+<!--only this part will be changing on click-->
 			<main class="col-sm-9 card">
 				{% block content %}{% endblock %}
 			</main>

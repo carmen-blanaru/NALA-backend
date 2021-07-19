@@ -40,7 +40,7 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="json")
      */
     private $roles;
 
@@ -144,12 +144,25 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(string $roles): self
+    /**
+     * $user->setRoles['ROLE_ADMIN', 'ROLE_MODO']
+     *
+     * @param array $roles
+     * @return self
+     */
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
