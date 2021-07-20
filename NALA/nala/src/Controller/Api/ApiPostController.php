@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Category;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,7 +79,6 @@ class ApiPostController extends AbstractController
         // Retrieve the data sent by the API user
         $dataSentByUser = $request->getContent();
 
-
         // Our Json data are transformed in a post object
         $newPost = $serializer->deserialize($dataSentByUser, Post::class, 'json');
         
@@ -98,4 +98,56 @@ class ApiPostController extends AbstractController
             'errors' => (string) $errors
         ],400 );        
     }
+    /**
+     * Change a post already stored in the database
+     *
+     * @Route("/{id}", name="modify", methods={"PUT|PATCH"})
+     */
+    public function modify($id, PostRepository $postRepository, UserRepository $userRepository, CategoryRepository $categoryRepository, Request $request, ValidatorInterface $validator)
+    {
+        $Post = $postRepository->find($id);
+
+        // Retrieve the data sent by the API user
+        $dataSentByUser = $request->getContent();
+  
+        // Transform the data sent in an associative table 
+        $arrayDataSentByUser = json_decode($dataSentByUser, true);
+        
+        if (isset($arrayDataSentByUser['picture'])) {
+            $Post->setPicture($arrayDataSentByUser['picture']);
+        }
+        if (isset($arrayDataSentByUser['title'])) {
+            $Post->setTitle($arrayDataSentByUser['title']);
+        }
+        if (isset($arrayDataSentByUser['display'])) {
+            $Post->setDisplay($arrayDataSentByUser['display']);
+        }
+        if (isset($arrayDataSentByUser['user'])) {
+            $User = $userRepository->find($arrayDataSentByUser['user']);
+            $Post->setUser($User);
+        }
+        if (isset($arrayDataSentByUser['category'])) {
+            $Category = $categoryRepository->find($arrayDataSentByUser['category']);
+            $Post->setCategory($Category);
+        }
+        $errors = $validator->validate($Post);
+        //dd($newPost);
+        if (count($errors)===0 ) {
+            $this->em->persist($Post);
+            $this->em->flush();
+            
+            // Success code the entry has been added to the database
+            return $this->json([
+                'message' => "La ressource à bien été modifiée"
+            ],201 );
+        }
+        // Code 400: Bad request 
+        return $this->json([
+            'errors' => (string) $errors
+        ],400 );  
+        
+        
+        dd($Post);        
+    }
+
 }
