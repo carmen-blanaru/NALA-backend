@@ -145,9 +145,20 @@ class ApiPostController extends AbstractController
         return $this->json([
             'errors' => (string) $errors
         ],400 );  
-        
-        
-        dd($Post);        
+    }
+
+    /** 
+     * Endpoint to delte a post
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @param  $post
+     * @return void
+     */
+    public function delete(Post $post)
+    {
+        $this->em->remove($post);
+        $this->em->flush();
+
+        return $this->json('', 204);
     }
 
 }
