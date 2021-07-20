@@ -17,19 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $title;
 
@@ -68,7 +68,7 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
-     * @Groups("user")
+     * @Groups({"user"})
      * 
      */
     private $userLike;

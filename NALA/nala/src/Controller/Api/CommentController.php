@@ -28,6 +28,7 @@ class CommentController extends AbstractController
      */
     public function showComment(Comment $comment): Response
     {
+        //dd($comment);
         return $this->json($comment, 200, [], [
             'groups' => 'comment'
         ]);

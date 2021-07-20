@@ -20,30 +20,31 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Groups({"user", "comment"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
-     * @Groups("user")
+     * @Groups({"user"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=200, unique=true)
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=200, unique=true)
-     * @Groups("user")
+     * @Groups({"user"})
      */
     private $email;
 
@@ -59,7 +60,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
-     * @Groups("user", "comment")
+     * @Groups({"user", "comment"})
      */
     private $picture;
 
@@ -80,21 +81,21 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
-     * @Groups("user")
+     * @Groups({"user"})
      * cascade={"persist"}
      */
     private $posts;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
-     * @Groups("user")
+     * @Groups({"user"})
      * cascade={"persist"}
      */
     private $comment;
 
     /**
      * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="userLike")
-     * @Groups("user")
+     * @Groups({"user"})
      * 
      */
     private $likedPosts;
