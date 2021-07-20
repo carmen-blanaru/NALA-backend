@@ -69,7 +69,7 @@ class User implements UserInterface
     private $themedisplay;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
