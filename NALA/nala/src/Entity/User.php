@@ -20,7 +20,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user")
+     * @Groups("user", "comment")
      */
     private $id;
 
@@ -37,7 +37,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=200, unique=true)
-     * @Groups("user")
+     * @Groups("user", "comment")
      */
     private $nickname;
 
@@ -48,9 +48,9 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json_array")
      */
-    private $roles = [];
+    private $roles = array();
 
     /**
      * @ORM\Column(type="string", length=200)
@@ -59,7 +59,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
-     * @Groups("user")
+     * @Groups("user", "comment")
      */
     private $picture;
 
@@ -81,12 +81,14 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
      * @Groups("user")
+     * cascade={"persist"}
      */
     private $posts;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
      * @Groups("user")
+     * cascade={"persist"}
      */
     private $comment;
 
