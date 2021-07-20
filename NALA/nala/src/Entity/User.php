@@ -80,7 +80,7 @@ class User
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user",cascade={"persist"})
      */
     private $comment;
 

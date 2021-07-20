@@ -52,14 +52,14 @@ class Post
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"post"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts",cascade={"persist"})
      * @Groups({"post"})
      */
     private $category;
