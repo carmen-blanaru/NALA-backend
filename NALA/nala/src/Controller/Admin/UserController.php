@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\Form\UserType;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Service\PictureUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,14 +32,20 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function newUser(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function newUser(Request $request, UserPasswordHasherInterface $passwordHasher, PictureUploader $pictureUploader)
     {
         $user = new User;
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
-        {
+        {   
+            //the service allowing the pictures upload
+            $newFileName = $pictureUploader->upload($form, 'picture');
+
+            // the path to the database is updated
+            $user->setPicture($newFileName); 
+
             //the password is recovered before hashing
            $plainPassword = $form->get('password')->getData();
 

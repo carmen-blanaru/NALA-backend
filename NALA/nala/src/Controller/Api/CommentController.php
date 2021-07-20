@@ -71,7 +71,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="update", methods={"PUT|PATCH"})
+     * @Route("/{id}", name="update", methods={"PATCH"})
      */
     public function updateComment(Comment $comment, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
