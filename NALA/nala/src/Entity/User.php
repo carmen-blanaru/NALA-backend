@@ -6,48 +6,54 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Cet adresse mail existe déjà!")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"post"})
+     * @Groups({"user", "comment", "post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Groups({"user", "comment"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Groups({"user"})
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=200)
-     * @Groups({"post"})
+     * @ORM\Column(type="string", length=200, unique=true)
+     * @Groups({"user", "comment","post"})
      */
     private $nickname;
 
     /**
-     * @ORM\Column(type="string", length=200)
-     * @Groups({"post"})
+     * @ORM\Column(type="string", length=200, unique=true)
+     * @Groups({"user", "post"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=200)
      * @Groups({"post"})
+     * @ORM\Column(type="json_array")
+
      */
-    private $roles;
+    private $roles = array();
 
     /**
      * @ORM\Column(type="string", length=200)
@@ -56,6 +62,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Groups({"user", "comment"})
      */
     private $picture;
 
@@ -65,7 +72,7 @@ class User
     private $themedisplay;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
@@ -76,16 +83,21 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
+     * @Groups({"user"})
+     * cascade={"persist"}
      */
     private $posts;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user",cascade={"persist"})
+     * @Groups({"user"})
      */
     private $comment;
 
     /**
      * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="userLike")
+     * @Groups({"user"})
+     * 
      */
     private $likedPosts;
 
@@ -94,6 +106,38 @@ class User
         $this->posts = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->likedPosts = new ArrayCollection();
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function getUserIdentifier() 
+    {
+        return $this->email;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getId(): ?int
@@ -149,12 +193,25 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(string $roles): self
+    /**
+     * $user->setRoles['ROLE_ADMIN', 'ROLE_MODO']
+     *
+     * @param array $roles
+     * @return self
+     */
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 

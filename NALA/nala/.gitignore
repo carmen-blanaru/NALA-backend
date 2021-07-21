@@ -19,5 +19,4 @@
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
-### picture folder ###
-/public/pictures
+/public/uploads

@@ -1,7 +1,9 @@
 <?php declare (strict_types = 1);
+
 namespace App\Normalizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+
 /**
  * Entity normalizer
  */

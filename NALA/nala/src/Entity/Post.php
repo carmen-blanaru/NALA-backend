@@ -17,19 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"post"})
+     * @Groups({"user", "comment", "post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"post"})
+     * @Groups({"user", "comment", "post"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"post"})
+     * @Groups({"user", "comment", "post"})
      */
     private $title;
 
@@ -55,6 +55,7 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"post"})
+     * cascade={"persist"}
      */
     private $user;
 
@@ -66,11 +67,14 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     * cascade={"persist"}
      */
     private $comment;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
+     * @Groups({"user"})
+     * 
      */
     private $userLike;
 

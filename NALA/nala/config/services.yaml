@@ -10,7 +10,8 @@ services:
         public: false
         autowire: true
         autoconfigure: true
-        tags: [serializer.normalizer]    
+
+        tags: [serializer.normalizer]
 
     # default configuration for services in *this* file
     _defaults:
