@@ -65,7 +65,7 @@ class CommentController extends AbstractController
             $this->em->flush();
 
             return $this->json([
-                'message' => 'Un nouvel commentaire a été ajouté!'
+                'message' => 'Un nouveau commentaire a été ajouté!'
             ], 201);
         }
     }

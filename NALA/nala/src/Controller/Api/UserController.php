@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -45,26 +46,36 @@ class UserController extends AbstractController
      *
      * Add a new user account to the database
      */
-    public function newUserAccount(Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
-    {
+    public function newUserAccount(Request $request, SerializerInterface $serializer, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator)
+    {   
+        $newUser = new User();
         // data in json format received from insomnia, javascript, etc
         $jsonData = $request->getContent();
-
+        
         // it is necessary to tranform these datas in objects using the deserialize method
-        $user = $serializer->deserialize($jsonData, User::class, 'json');
+        $newUser = $serializer->deserialize($jsonData, User::class, 'json');
 
+        $plainPassword = $newUser->getPassword();
+
+        $hashedPassword = $passwordHasher->hashPassword(
+            $newUser,
+            $plainPassword
+        );
+        $newUser->setPassword($hashedPassword);
+       
         // important step: verify if the user did errors during the creation of the account
-        $errors = $validator->validate($user);
+        $errors = $validator->validate($newUser);
 
+        
         // if everything is alright
         if(count($errors) == 0) 
         {   
             // the datas are sent to the database and the process is stopped here with a 201 message
-            $this->em->persist($user);
+            $this->em->persist($newUser);
             $this->em->flush();
 
             return $this->json([
-                'message' => 'L\'user ' . $user->getNickname() . ' a bien été ajouté'
+                'message' => 'L\'user ' . $newUser->getNickname() . ' a bien été ajouté'
             ], 201);
         }
         // if there are any errors, a 500 message is displayed 
@@ -76,7 +87,7 @@ class UserController extends AbstractController
     /**
      *  @Route("/{id}", name="update", methods={"PUT|PATCH"})
      */
-    public function updateUserAccount(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
+    public function updateUserAccount(User $user, Request $request, SerializerInterface $serializer, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator)
     {
          // data in json format received from insomnia, javascript, etc
         $jsonData = $request->getContent();
@@ -85,6 +96,13 @@ class UserController extends AbstractController
         // due to the dematerialize method
         $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
 
+        $plainPassword = $user->getPassword();
+
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plainPassword
+        );
+        $user->setPassword($hashedPassword);
         $errors = $validator->validate($user);
         if(count($errors) == 0)
         {
