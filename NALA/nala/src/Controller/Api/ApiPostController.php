@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/post", name="api_post")
+ * @Route("/api/post", name="api_post_")
  */
 
 class ApiPostController extends AbstractController
