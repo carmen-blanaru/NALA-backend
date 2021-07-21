@@ -17,46 +17,51 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment"})
+     * @Groups({"user", "comment", "post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment"})
+     * @Groups({"user", "comment", "post"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment"})
+     * @Groups({"user", "comment", "post"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"post"})
      */
     private $display;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"post"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"post"})
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"post"})
      * cascade={"persist"}
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts",cascade={"persist"})
+     * @Groups({"post"})
      */
     private $category;
 
