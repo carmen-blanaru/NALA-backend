@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/post", name="api_post_")
+ * @Route("/api/v1/post", name="api_post_")
  */
 
 class ApiPostController extends AbstractController
@@ -32,7 +32,7 @@ class ApiPostController extends AbstractController
 
     /**
      * Return all the posts from the site
-     *      * 
+     *       
      *  @Route("/", name="list", methods={"GET"})
      */
     public function index(PostRepository $postRepository): Response
