@@ -148,7 +148,7 @@ class ApiPostController extends AbstractController
     }
 
     /** 
-     * Endpoint to delte a post
+     * Endpoint to delete a post
      * @Route("/{id}", name="delete", methods={"DELETE"})
      * @param  $post
      * @return void
