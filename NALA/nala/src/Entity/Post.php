@@ -17,19 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment", "post"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment", "post"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment", "post"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $title;
 
@@ -46,8 +46,7 @@ class Post
     private $createdAt;
 
     /**
-
-     * @ORM\Column(type="datetime_immutable", columnDefinition="timestamp default current_timestamp on update current_timestamp")
+     * @ORM\Column(type="datetime_immutable", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
      * @Groups({"post"})
      */
     private $updatedAt;
@@ -78,10 +77,10 @@ class Post
      * 
      */
     private $userLike;
-
-    /**
+    
+     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"post", "comment"})
+     * @Groups({"post", "comment", "category"})
      */
     private $pictureBase64;
 
