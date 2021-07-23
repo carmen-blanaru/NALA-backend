@@ -77,7 +77,7 @@ class Post
      * 
      */
     private $userLike;
-
+    
      /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"post", "comment", "category"})

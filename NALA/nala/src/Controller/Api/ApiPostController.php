@@ -130,6 +130,9 @@ class ApiPostController extends AbstractController
             $Category = $categoryRepository->find($arrayDataSentByUser['category']);
             $Post->setCategory($Category);
         }
+        if (isset($arrayDataSentByUser['pictureBase64'])) {
+            $Post->setPictureBase64($arrayDataSentByUser['pictureBase64']);
+        }
         $errors = $validator->validate($Post);
         //dd($newPost);
         if (count($errors)===0 ) {
