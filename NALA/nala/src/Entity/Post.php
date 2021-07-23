@@ -78,6 +78,13 @@ class Post
      */
     private $userLike;
 
+     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"post", "comment", "category"})
+     */
+    private $pictureBase64;
+
+
     
 
     public function __construct()
@@ -226,6 +233,18 @@ class Post
     public function removeUserLike(User $userLike): self
     {
         $this->userLike->removeElement($userLike);
+
+        return $this;
+    }
+
+    public function getPictureBase64(): ?string
+    {
+        return $this->pictureBase64;
+    }
+
+    public function setPictureBase64(?string $pictureBase64): self
+    {
+        $this->pictureBase64 = $pictureBase64;
 
         return $this;
     }
