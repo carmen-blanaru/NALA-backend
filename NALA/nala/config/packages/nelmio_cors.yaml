@@ -7,4 +7,10 @@ nelmio_cors:
         expose_headers: ['Link']
         max_age: 3600
     paths:
+        '^/api/':
+            allow_origin: ['^http://ec2-54-197-127-233.compute-1.amazonaws.com']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'PATCH', 'GET', 'DELETE']
+            max_age: 3600
+
         '^/': null
