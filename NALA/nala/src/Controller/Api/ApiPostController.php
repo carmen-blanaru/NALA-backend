@@ -150,6 +150,37 @@ class ApiPostController extends AbstractController
         ],400 );  
     }
 
+    /**
+     * EndPOnt to add a like in the database
+     *
+     * @Route("/{id}/like/{userid}", name="add_like", methods={"PUT|PATCH"})
+     */
+    public function add_like($id, $userid, PostRepository $postRepository, UserRepository $userRepository, Request $request, ValidatorInterface $validator)
+    {
+        $Post = $postRepository->find($id);
+        //Retrieve the user that like the post
+        $User = $userRepository->find($userid);
+        $Post->addUserLike($User);
+        
+    
+
+        $errors = $validator->validate($Post);
+        //dd($newPost);
+        if (count($errors)===0 ) {
+            $this->em->persist($Post);
+            $this->em->flush();
+            
+            // Success code the entry has been added to the database
+            return $this->json([
+                'message' => "La ressource à bien été modifiée"
+            ],201 );
+        }
+        // Code 400: Bad request 
+        return $this->json([
+            'errors' => (string) $errors
+        ],400 );  
+    }
+
     /** 
      * Endpoint to delete a post
      * @Route("/{id}", name="delete", methods={"DELETE"})
