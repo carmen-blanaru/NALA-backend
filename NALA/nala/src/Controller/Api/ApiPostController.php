@@ -56,6 +56,21 @@ class ApiPostController extends AbstractController
                 'groups' => 'post'
             ]);
     }
+
+    /**
+     * Return the Top loved posted
+     *  
+     *  @Route("/toplove", name="toplove", methods={"GET"})
+     */
+    public function topLove(PostRepository $postRepository): Response
+    {
+        $Post = $postRepository->topLove();
+        // dd($Post);
+        return $this->json($Post,200,[],[
+                'groups' => 'post'
+            ]);
+    }
+
     /**
      * Return a specific post from its ID
      * 
