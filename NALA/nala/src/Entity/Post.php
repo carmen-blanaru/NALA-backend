@@ -80,7 +80,7 @@ class Post
     
      /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"post", "comment", "category"})
+     * @Groups({"post", "comment"})
      */
     private $pictureBase64;
 
