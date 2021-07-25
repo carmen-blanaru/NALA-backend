@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("", name="list")
+     * @Route("", name="list", methods={"GET"})
      */
     public function categoryList(CategoryRepository $categoryRepository): Response
     {
@@ -21,6 +22,16 @@ class CategoryController extends AbstractController
         //dd($categories);
         return $this->json($categories, 200, [], [
             'groups' => 'category'
+        ]);
+    }
+
+     /**
+     * @Route("/{id}", name="show", methods={"GET"})
+     */
+    public function showCategoryById(Category $category)
+    {
+        return $this->json($category, 200, [], [
+            'groups' => 'showById'
         ]);
     }
 }

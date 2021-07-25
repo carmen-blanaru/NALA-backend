@@ -17,20 +17,20 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"post", "category"})
+     * @Groups({"post", "category", "showById"})
      * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"post", "category"})
+     * @Groups({"post", "category", "showById"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"category"})
+     * @Groups({"category", "showById"})
      */
     private $description;
 
@@ -51,7 +51,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
-     * 
+     * @Groups({"showById"})
      */
     private $posts;
 
