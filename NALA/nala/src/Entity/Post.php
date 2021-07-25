@@ -17,19 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post", "showById"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post", "showById"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post", "showById"})
      */
     private $title;
 
@@ -80,7 +80,7 @@ class Post
     
      /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"post", "comment", "category"})
+     * @Groups({"post", "comment"})
      */
     private $pictureBase64;
 
