@@ -16,14 +16,14 @@ class CategoryController extends AbstractController
     /**
      * @Route("", name="list", methods={"GET"})
      */
-    public function categoryList(CategoryRepository $categoryRepository): Response
-    {
-        $categories = $categoryRepository->findAll();
+    //public function categoryList(CategoryRepository $categoryRepository): Response
+    //{
+    //    $categories = $categoryRepository->findAll();
         //dd($categories);
-        return $this->json($categories, 200, [], [
-            'groups' => 'category'
-        ]);
-    }
+    //    return $this->json($categories, 200, [], [
+    //        'groups' => 'category'
+    //    ]);
+    //}
 
      /**
      * @Route("/{id}", name="show", methods={"GET"})
@@ -32,6 +32,17 @@ class CategoryController extends AbstractController
     {
         return $this->json($category, 200, [], [
             'groups' => 'showById'
+        ]);
+    }
+    /**
+     * @Route("", name="list", methods={"GET"})
+     */
+    public function categoryList(CategoryRepository $categoryRepository): Response
+    {
+        $categories = $categoryRepository->listCategoryLimitedFivePictures();
+        //dd($categories);
+        return $this->json($categories, 200, [], [
+            'groups' => 'category'
         ]);
     }
 }

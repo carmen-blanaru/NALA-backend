@@ -19,6 +19,17 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function listCategoryLimitedFivePictures()
+    {  
+        $chien = 'chien';
+        return $this->createQueryBuilder('c')
+            ->where('c.name = :chien')->setParameter('chien', $chien)
+            ->leftJoin('c.posts', 'p')
+            ->setMaxResults(5)
+            ->addSelect('p')
+            ->getQuery()
+            ->execute();
+    }
 
     // /**
     //  * @return Category[] Returns an array of Category objects

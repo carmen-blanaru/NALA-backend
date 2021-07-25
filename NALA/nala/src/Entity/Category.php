@@ -51,7 +51,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
-     * @Groups({"showById"})
+     * @Groups({"showById", "category"})
      */
     private $posts;
 
