@@ -17,19 +17,19 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment", "post", "category"})
+     * @Groups({"user", "comment", "post"})
      */
     private $title;
 
