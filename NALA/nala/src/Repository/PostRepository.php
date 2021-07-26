@@ -34,6 +34,38 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+    * @return Post[] 
+    * Returns Post objects for the 10 most like pictures that are last than 7 days OLd 
+    *
+    */
+    public function topLove()
+    {
+/*        $teamsingroup = $em->getRepository("AppBundle\Model\Entity\Team")
+                    ->createQueryBuilder('o')
+                    ->innerJoin('o.userLIke', 't')
+*/
+        $l7day = date('Y-m-d h:i:s', strtotime("-7 days"));
+        // server date seem to be US based so we need to add & day
+        $today = date('Y-m-d h:i:s', strtotime("+1 days")); 
+
+        //dd(date('Y-m-d h:i:s'));
+
+        return $this->createQueryBuilder('p')
+            ->select('p','COUNT(p.id) as countLike')
+            ->innerJoin('p.userLike', 'u')
+            ->where('p.createdAt >=:l7day and p.createdAt<= :today' )
+            ->setParameter('today', $today)
+            ->setParameter('l7day', $l7day)
+            ->groupBy('p.id')
+            ->orderBy('countLike', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 
     // /**
     //  * @return Post[] Returns an array of Post objects

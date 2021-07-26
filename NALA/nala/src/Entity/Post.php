@@ -23,7 +23,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment", "post", "showById", "category"})
+     * @Groups({"user", "comment", "post"})
      */
     private $picture;
 
@@ -46,7 +46,7 @@ class Post
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
      * @Groups({"post"})
      */
     private $updatedAt;
