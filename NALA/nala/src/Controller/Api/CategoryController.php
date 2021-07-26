@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
     public function showCategoryById(Category $category)
     {
         return $this->json($category, 200, [], [
-            'groups' => 'showById'
+            'groups' => 'category'
         ]);
     }
     /**
