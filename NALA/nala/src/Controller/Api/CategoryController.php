@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
      */
     public function categoryList(CategoryRepository $categoryRepository): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->listCategoryLimitedFivePictures();
         return $this->json($categories, 200, [], [
             'groups' => 'category'
         ]);
