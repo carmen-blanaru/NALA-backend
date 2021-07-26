@@ -41,7 +41,7 @@ class Post
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"post"})
+     * @Groups({"post", "category", "showById"})
      */
     private $createdAt;
 
