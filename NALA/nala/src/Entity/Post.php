@@ -17,7 +17,7 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment", "post", "showById", "category"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $id;
 
@@ -29,7 +29,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment", "post", "showById", "category"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $title;
 
@@ -41,7 +41,7 @@ class Post
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"post", "category", "showById"})
+     * @Groups({"post", "category"})
      */
     private $createdAt;
 
