@@ -19,17 +19,30 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    // this function will recover the list of the categories and will show 5 pictures per category
     public function listCategoryLimitedFivePictures()
     {  
-        $chien = 'chien';
-        return $this->createQueryBuilder('c')
-            ->where('c.name = :chien')->setParameter('chien', $chien)
+        // the variable $categories stores the result of the request ==> the list of the categories
+        $categories = $this->createQueryBuilder('cat')
+        ->getQuery()
+        ->execute();
+       
+        // in order to  show the pictures for each category, the loop foreach is necessary
+        foreach ($categories as $currentCategory) 
+        {
+            $currentCategoryName = $currentCategory->getName();
+            $result[] = $this->createQueryBuilder('c')
+            ->where('c.name = :categoryName')->setParameter('categoryName', $currentCategoryName)
             ->leftJoin('c.posts', 'p')
             ->setMaxResults(5)
             ->addSelect('p')
             ->getQuery()
             ->execute();
+        }
+        return $result ;
     }
+    
+    
 
     // /**
     //  * @return Category[] Returns an array of Category objects

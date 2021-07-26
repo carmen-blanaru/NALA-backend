@@ -13,17 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
-    /**
-     * @Route("", name="list", methods={"GET"})
-     */
-    //public function categoryList(CategoryRepository $categoryRepository): Response
-    //{
-    //    $categories = $categoryRepository->findAll();
-        //dd($categories);
-    //    return $this->json($categories, 200, [], [
-    //        'groups' => 'category'
-    //    ]);
-    //}
 
      /**
      * @Route("/{id}", name="show", methods={"GET"})
