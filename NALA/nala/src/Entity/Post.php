@@ -40,13 +40,13 @@ class Post
     private $display;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", columnDefinition="timestamp default current_timestamp")
      * @Groups({"post"})
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
      * @Groups({"post"})
      */
     private $updatedAt;
