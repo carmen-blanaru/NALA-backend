@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
-
      /**
      * @Route("/{id}", name="show", methods={"GET"})
      */
