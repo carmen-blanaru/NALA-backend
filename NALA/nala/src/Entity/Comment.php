@@ -31,13 +31,13 @@ class Comment
     private $display;
 
     /**
-     * @ORM\Column(type="datetime_immutable", columnDefinition="timestamp default current_timestamp")
+     * @ORM\Column(type="datetime", columnDefinition="timestamp default current_timestamp")
      * @Groups({"comment"})
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
+     * @ORM\Column(type="datetime", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
      * 
      */
     private $updatedAt;

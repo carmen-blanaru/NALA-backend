@@ -10,7 +10,12 @@
 <section class="py-5 text-center container">
 		<div class="row py-lg-5 mt-4">
 			<div class="col-lg-6 col-md-8 mx-auto">
+				{% if app.user%}
+				<h1 class="fw-light">Bonjour, </br>
+					Vous êtes connecté en tant que {{app.user.nickname}}</h1>
+				{% else %}
 				<h1 class="fw-light">Bienvenue dans le BackOffice NALA</h1>
+				{% endif %}
 			</div>
 		</div>
 	</section>
