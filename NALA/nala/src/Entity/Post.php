@@ -68,6 +68,7 @@ class Post
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
      * cascade={"persist"}
+     * @Groups({"post"})
      */
     private $comment;
 
@@ -80,7 +81,7 @@ class Post
     
      /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"post", "comment", "category", "showById"})
+     * @Groups({"post", "comment", "category"})
      */
     private $pictureBase64;
 
