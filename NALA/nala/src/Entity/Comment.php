@@ -15,13 +15,13 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user", "comment"})
+     * @Groups({"user", "comment", "post"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user", "comment"})
+     * @Groups({"user", "comment", "post"})
      */
     private $description;
 
@@ -32,7 +32,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime", columnDefinition="timestamp default current_timestamp")
-     * @Groups({"comment"})
+     * @Groups({"comment", "post"})
      */
     private $createdAt;
 
