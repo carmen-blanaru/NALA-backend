@@ -40,7 +40,7 @@ class Post
     private $display;
 
     /**
-     * @ORM\Column(type="datetime, columnDefinition="timestamp default current_timestamp on update current_timestamp")
+     * @ORM\Column(type="datetime", columnDefinition="timestamp default current_timestamp on update current_timestamp")
      * @Groups({"post", "category"})
      */
     private $createdAt;
