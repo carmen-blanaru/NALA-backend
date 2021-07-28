@@ -45,7 +45,8 @@ class PostRepository extends ServiceEntityRepository
                     ->createQueryBuilder('o')
                     ->innerJoin('o.userLIke', 't')
 */
-        $l7day = date('Y-m-d h:i:s', strtotime("-7 days"));
+        // Change to 70 days as we do not have post being regularly posted
+        $l7day = date('Y-m-d h:i:s', strtotime("-70 days"));
         // server date seem to be US based so we need to add & day
         $today = date('Y-m-d h:i:s', strtotime("+1 days")); 
 
