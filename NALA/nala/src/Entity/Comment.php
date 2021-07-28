@@ -45,7 +45,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"comment", "post"})
+     * @Groups({"comment","post"})
      * cascade={"persist"}
      */
     private $user;
