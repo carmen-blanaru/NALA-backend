@@ -58,6 +58,19 @@ class ApiPostController extends AbstractController
     }
 
     /**
+     * Return the last 10 created posts
+     *  
+     *  @Route("/lastten", name="lastten", methods={"GET"})
+     */
+    public function lastten(PostRepository $postRepository): Response
+    {
+        $Post = $postRepository->findLast10();
+        // dd($Post);
+        return $this->json($Post,200,[],[
+                'groups' => 'post'
+            ]);
+    }
+    /**
      * Return the Top loved posted
      *  
      *  @Route("/toplove", name="toplove", methods={"GET"})
