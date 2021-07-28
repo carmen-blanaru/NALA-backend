@@ -1,0 +1,16 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Modifier profil {% endblock %}
+
+{% block content %}
+
+
+<div class="example-wrapper">
+    <h3> Modifier le profil de {{user.nickname}}</h3>
+
+    {{ include('admin/user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('admin_user_list') }}"> Retour à la liste des utilisateurs </a>
+   
+</div>
+{% endblock %}
