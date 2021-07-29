@@ -1,17 +1,42 @@
 {% extends 'admin/layout.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %} Liste des utilisateurs {% endblock %}
 
 {% block content %}
 
 
-<div class="example-wrapper">
-    <h1>Hello! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/apothéose/NALA/nala/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/apothéose/NALA/nala/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
+<div class="example-wrapper sm">
+<a class="mt-2 mb-2 btn btn-outline-primary btn-lg" href="{{ path('admin_user_create')}}" role= "button"> Nouvel utilisateur </a>
+    <h1> La liste des utilisateurs </h1>
+        <table class="table text-center">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Pseudo</th>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Prénom</th>
+				<th>Nom</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+                    <td>{{ user.nickname }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.lastname }}</td>
+					<td class="d-flex">
+						<a href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
+						<a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+   
 </div>
 {% endblock %}
