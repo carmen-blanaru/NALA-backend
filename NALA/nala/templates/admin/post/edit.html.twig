@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Edition d'un Post
+{% endblock %}
+
+{% block content%}
+	<h1> Edition du post </h1>
+
+	{{ include('admin/post/_form.html.twig') }}
+
+	<a href="{{ path('admin_post_list') }}"> Retour à la liste </a>
+{% endblock %}
