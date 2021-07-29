@@ -1,6 +1,6 @@
 {% extends 'admin/layout.html.twig' %}
 
-{% block title %} Liste des utilisateurs {% endblock %}
+{% block title %} Liste des posts {% endblock %}
 
 {% block content %}
 
@@ -29,9 +29,10 @@
 					<td>{{ postCurrent.createdAt|date("d/m/Y")}}</td>
 					<td>{{ postCurrent.updatedAt |date("m/d/Y") }}</td>
 					<td>{{ postCurrent.picture }}</td>
-                    <td><picture>
-                        <source src="{{ postCurrent.pictureBase64 }} media="(max-width: 100px)">
-                    </picture></td>
+                    <td>
+                        {# Remove the base 64 when we find a solution to save the picture within the backoffice #}
+                        <img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}"style='max-width:100px;' ></img>
+                    </td>
 					<td class="d-flex">
 						{# <a href="{{ path('admin_user_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
 						<a href="{{ path('admin_user_edit', {'id': postCurrent.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a> #}
