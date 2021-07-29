@@ -19,19 +19,25 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', null, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('lastname', null, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('nickname', null, [
                 'required' => true,
-                'label' => 'Pseudonyme'
+                'label' => 'Pseudonyme',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse mail'
+                'required' => true,
+                'label' => 'Adresse mail',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('roles', ChoiceType::class, [
+                'required' => true,
                 'choices' => [
                     'Super Administrateur' => 'ROLE_SUPER_ADMIN',
                     'Administrateur' => 'ROLE_ADMIN',
@@ -39,16 +45,19 @@ class UserType extends AbstractType
                 ],
                 'multiple' => true,
                 'expanded' => true,
+                'attr' => ['class' => 'list-group-horizontal list-group-item-info mb-3'],
                 'label' => 'Rôle'
             ])
             ->add('password', PasswordType::class, [
                 'required' => true,
-                'label' => 'Mot de passe'
+                'label' => 'Mot de passe',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('picture', FileType::class, [
                 'data_class' => null,
-                'label' => 'Ajouter une image',
+                'label' => 'Ajouter un avatar',
                 'required' => false,
+                'attr' => ['class' => 'form-control mb-3'],
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -59,7 +68,8 @@ class UserType extends AbstractType
            // ->add('themedisplay')
             ->add('createdAt', DateType::class, [
                 'widget' => 'single_text',
-                'label' => "Choisissez une date"
+                'label' => "Date de création",
+                'attr' => ['class' => 'form-control mb-3']
             ])
             //->add('updatedAt')
             //->add('likedPosts')

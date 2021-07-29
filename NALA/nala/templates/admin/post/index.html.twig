@@ -1,0 +1,53 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Liste des posts {% endblock %}
+
+{% block content %}
+
+
+<div class="example-wrapper sm">
+{# No need for that One ? 
+<a class="mt-2 mb-2 btn btn-outline-primary btn-lg" href="{{ path('admin_user_create')}}" role= "button"> Nouvel utilisateur </a> #}
+    <h1> La liste des posts </h1>
+        <table class="table sm">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>titre</th>
+				<th>Visible</th>
+				<th>Date Création</th>
+				<th>Date Modification</th>
+				<th>Titre Photo</th>
+				<th>Photo</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for postCurrent in postList %}
+				<tr>
+					<td>{{ postCurrent.id }}</td>
+                    <td>{{ postCurrent.title }}</td>
+					<td>{% if postCurrent.display%} Oui
+						{% else %} Non {% endif %}
+					</td>
+					<td>{{ postCurrent.createdAt|date("d/m/Y")}}</td>
+					<td>{{ postCurrent.updatedAt |date("m/d/Y") }}</td>
+					<td>{{ postCurrent.picture }}</td>
+                    <td>
+                        {# Remove the base 64 when we find a solution to save the picture within the backoffice #}
+                        <img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}"style='max-width:100px;' ></img>
+                    </td>
+					<td class="d-flex">
+						<a href="{{ path('admin_post_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
+						<a href="{{ path('admin_post_edit', {'id': postCurrent.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a> 
+						{# We should secure this route with a Token #}
+						<a href="{{ path('admin_post_delete', {'id': postCurrent.id}) }}" class="btn btn-outline-danger btn-sm ms-2">Supprimer</a> 
+						
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+   
+</div>
+{% endblock %}
