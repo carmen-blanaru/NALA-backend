@@ -1,0 +1,38 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Liste des commentaires {% endblock %}
+
+{% block content %}
+    <div class="example-wrapper sm">
+    <h1> La liste des commentaires </h1>
+
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Display</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.description }}</td>
+                <td>{{ comment.display ? 'Oui' : 'Non' }}</td>
+                <td class="d-flex justify-content-center">
+                    <a href="{{ path('admin_comment_show', {'id': comment.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
+                    {# <a href="{{ path('admin_comment_edit', {'id': comment.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6"> Aucun commentaire trouvé! </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% endblock %}

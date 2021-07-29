@@ -1,0 +1,44 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+
+{% block content %}
+    <div class="example-wrapper sm">
+    <h3> Commentaire </h3>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ comment.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ comment.description }}</td>
+            </tr>
+            <tr>
+                <th>Display</th>
+                <td>{{ comment.display ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Date de publication</th>
+                <td>{{ comment.createdAt ? comment.createdAt|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de mis à jour</th>
+                <td>{{ comment.updatedAt ? comment.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Effectué par </th>
+                <td>{{ comment.user.nickname}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="d-flex"> 
+    {# <a class="mt-2 mb-2 btn btn-outline-warning btn-sm" href="{{ path('admin_comment_edit', {'id': comment.id})}}" role= "button"> Modifier </a> #}
+    {{ include('admin/comment/_delete_form.html.twig') }}
+    </div>
+
+    <a href="{{ path('admin_comment_list') }}" class="mt-2 px-1 text-decoration-none fst-italic text-info bg-dark w-25 text-center rounded-2"> Retour à la liste des commentaires </a>
+{% endblock %}
