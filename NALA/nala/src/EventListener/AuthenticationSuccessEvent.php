@@ -3,17 +3,9 @@
 namespace App\EventListener;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use App\Entity\User;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class AuthenticationSuccessListener
 {
-
-    private $serializer;
-
-    public function __construct(SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
-    }
     /**
      * @param AuthenticationSuccessEvent $event
      */
