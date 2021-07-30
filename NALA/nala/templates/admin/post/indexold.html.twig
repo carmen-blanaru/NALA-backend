@@ -9,21 +9,14 @@
 {# No need for that One ? 
 <a class="mt-2 mb-2 btn btn-outline-primary btn-lg" href="{{ path('admin_user_create')}}" role= "button"> Nouvel utilisateur </a> #}
     <h1> La liste des posts </h1>
-	{# total items count 
-	<div class="count">
-    {{ postList.getTotalItemCount }}
-	</div> #}
         <table class="table sm">
 		<thead>
 			<tr>
-				<th{% if postList.isSorted('p.id') %} class="sorted"{% endif %}>
-				{{ knp_pagination_sortable(postList,'Id','p.id')}}</th>
-				<th{% if postList.isSorted('p.title') %} class="sorted"{% endif %}>
-				{{ knp_pagination_sortable(postList,'Titre','p.title')}}</th>
-				<th{% if postList.isSorted('p.display') %} class="sorted"{% endif %}>
-				{{ knp_pagination_sortable(postList,'Visible','p.display')}}</th>
-				<th{% if postList.isSorted('p.createdAt') %} class="sorted"{% endif %}>
-				{{ knp_pagination_sortable(postList,'Date Création','p.createdAt')}}</th>				
+				<th>Id</th>
+				<th>titre</th>
+				<th>Visible</th>
+				<th>Date Création</th>
+				<th>Date Modification</th>
 				<th>Titre Photo</th>
 				<th>Photo</th>
 				<th></th>
@@ -38,15 +31,11 @@
 						{% else %} Non {% endif %}
 					</td>
 					<td>{{ postCurrent.createdAt|date("d/m/Y")}}</td>
+					<td>{{ postCurrent.updatedAt |date("m/d/Y") }}</td>
 					<td>{{ postCurrent.picture }}</td>
                     <td>
-
-						{% if postCurrent.picture %}
-							<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:250px;">
-						{% else %}
-							<img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}" style="max-width:250px;" >
-						{% endif %}
-
+                        {# Remove the base 64 when we find a solution to save the picture within the backoffice #}
+                        <img src="data:image/jpg;base64,  {{ postCurrent.pictureBase64 }}"style='max-width:100px;' ></img>
                     </td>
 					<td class="d-flex">
 						<a href="{{ path('admin_post_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
@@ -59,10 +48,6 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	{# display navigation #}
-<div class="navigation">
-    {{ knp_pagination_render(postList) }}
-</div>
    
 </div>
 {% endblock %}
