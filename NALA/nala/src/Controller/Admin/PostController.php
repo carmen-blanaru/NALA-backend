@@ -6,6 +6,8 @@ use App\Entity\Post;
 use App\Form\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\PictureUploader;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,13 +21,27 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request, PostRepository $postRepository): Response
     {
+
+        $dql   = "SELECT p FROM App\Entity\Post p";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+        $query, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        10 /*limit per page*/
+    );
+    //dd($pagination);
+        // parameters to template
+        return $this->render('admin/post/index.html.twig', ['postList' => $pagination]);
+       
+        /*
         $postList = $postRepository->findAll();
         return $this->render('admin/post/index.html.twig', [
             'controller_name' => 'PostController',
             'postList'        => $postList
-        ]);
+        ]);*/
     }
 
     /**
