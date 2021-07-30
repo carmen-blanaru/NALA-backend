@@ -34,7 +34,13 @@
 			</tr>
             <tr>
 				<th>Photo</th>            
-                <td><img src="data:image/jpg;base64, {{ post.pictureBase64 }}"style='max-width:100%;' ></img></td>
+                <td>
+				{% if post.picture %}
+				 	<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ post.picture) }}" style="max-width:250px;" >
+				{% else %}
+					<img src="data:image/jpg;base64, {{ post.pictureBase64 }}"style="max-width:250px;" ></img>
+				{% endif %}
+				</td>
 			</tr>            
 
 		</tbody>

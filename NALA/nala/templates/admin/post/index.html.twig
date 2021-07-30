@@ -34,8 +34,11 @@
 					<td>{{ postCurrent.updatedAt |date("m/d/Y") }}</td>
 					<td>{{ postCurrent.picture }}</td>
                     <td>
-                        {# Remove the base 64 when we find a solution to save the picture within the backoffice #}
-                        <img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}"style='max-width:100px;' ></img>
+						{% if postCurrent.picture %}
+							<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:250px;">
+						{% else %}
+							<img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}" style="max-width:250px;" >
+						{% endif %}
                     </td>
 					<td class="d-flex">
 						<a href="{{ path('admin_post_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>

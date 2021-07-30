@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
+use App\Service\UploaderBase64;
 /**
  * @Route("/api/v1/post", name="api_post_")
  */
@@ -102,13 +102,26 @@ class ApiPostController extends AbstractController
      *
      * @Route("/", name="add", methods={"POST"})
      */
-    public function add(Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
+    public function add(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, UploaderBase64 $uploaderBase64)
     {
         // Retrieve the data sent by the API user
         $dataSentByUser = $request->getContent();
 
+        $arrayData = json_decode($dataSentByUser, true);
+
+        if(!str_contains($arrayData['picture'], 'data:image/') && $arrayData['picture'] !== '') {
+            return $this->json(['message' => 'Mauvais format d\'image'], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if($arrayData['picture'] !== '') {
+            $uploadImageName = $uploaderBase64->upload($arrayData['picture'], $this->getParameter('images_directory'));
+        }
+
         // Our Json data are transformed in a post object
         $newPost = $serializer->deserialize($dataSentByUser, Post::class, 'json');
+        if(isset($uploadImageName)) {
+            $newPost->setPicture($uploadImageName);
+        }
         
         $errors = $validator->validate($newPost);
         //dd($newPost);
