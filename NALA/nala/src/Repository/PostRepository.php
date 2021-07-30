@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\BrowserKit\Request;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -64,6 +67,22 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+    /**
+    * @return Post[] 
+    * Returns Post objects for the 10 most like pictures that are last than 7 days OLd 
+    *
+    */
+    public function list_paginated(EntityManagerInterface $em,PaginatorInterface $paginator, Request $request)
+    {
+        $dql   = "SELECT p FROM Post p";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        10 /*limit per page*/
+        );
     }
 
 
