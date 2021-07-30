@@ -40,13 +40,7 @@
 					<td>{{ postCurrent.createdAt|date("d/m/Y")}}</td>
 					<td>{{ postCurrent.picture }}</td>
                     <td>
-
-						{% if postCurrent.picture %}
-							<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:250px;">
-						{% else %}
-							<img src="data:image/jpg;base64, {{ postCurrent.pictureBase64 }}" style="max-width:250px;" >
-						{% endif %}
-
+						<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:100px;">
                     </td>
 					<td class="d-flex">
 						<a href="{{ path('admin_post_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
