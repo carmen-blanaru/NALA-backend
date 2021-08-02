@@ -14,10 +14,12 @@ class PostType extends AbstractType
         $builder
             ->add('Title', null, [
                 'required' => true,
-                'label' => 'Titre'
+                'label' => 'Titre',
+                'attr' => ['class' => 'form-control mb-3']
             ])
             ->add('display', null, [
-                'label' => 'affichage'
+                'label' => 'Affichage',
+                'attr' => ['class' => 'mb-3']
             ])
 
         ;

@@ -23,7 +23,7 @@
                 <td>{{ comment.display ? 'Oui' : 'Non' }}</td>
                 <td class="d-flex justify-content-center">
                     <a href="{{ path('admin_comment_show', {'id': comment.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
-                    {# <a href="{{ path('admin_comment_edit', {'id': comment.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a> #}
+                    <a href="{{ path('admin_comment_edit', {'id': comment.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a>
                 </td>
             </tr>
         {% else %}

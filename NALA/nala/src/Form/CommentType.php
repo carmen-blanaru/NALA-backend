@@ -12,12 +12,18 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description')
-            ->add('display')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('user')
-            ->add('post')
+            ->add('description', null, [
+                'label' => 'Le commentaire',
+                'attr' => ['class' => 'form-control mb-3']
+            ])
+            ->add('display', null, [
+                'label' => 'Affichage',
+                'attr' => ['class' => 'form-check form-check-label']
+            ])
+            // ->add('createdAt')
+            // ->add('updatedAt')
+            // ->add('user')
+            // ->add('post')
         ;
     }
 

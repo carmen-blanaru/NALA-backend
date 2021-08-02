@@ -31,7 +31,7 @@
 						{% else %} Non {% endif %}
 					</td>
 					<td>{{ postCurrent.createdAt|date("d/m/Y")}}</td>
-					<td>{{ postCurrent.updatedAt |date("m/d/Y") }}</td>
+					<td>{{ postCurrent.updatedAt |date("d/m/Y") }}</td>
 					<td>{{ postCurrent.picture }}</td>
                     <td>
                         {# Remove the base 64 when we find a solution to save the picture within the backoffice #}

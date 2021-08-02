@@ -35,25 +35,25 @@ class CommentController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}/edition", name="edit", methods={"GET","POST"})
-    //  */
-    // public function edit(Request $request, Comment $comment): Response
-    // {
-    //     $form = $this->createForm(CommentType::class, $comment);
-    //     $form->handleRequest($request);
+    /**
+     * @Route("/{id}/edition", name="edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Comment $comment): Response
+    {
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
-    //         return $this->redirectToRoute('admin_comment_index', [], Response::HTTP_SEE_OTHER);
-    //     }
+            return $this->redirectToRoute('admin_comment_list', [], Response::HTTP_SEE_OTHER);
+        }
 
-    //     return $this->renderForm('admin/comment/edit.html.twig', [
-    //         'comment' => $comment,
-    //         'form' => $form,
-    //     ]);
-    // }
+        return $this->renderForm('admin/comment/edit.html.twig', [
+            'comment' => $comment,
+            'form' => $form,
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
