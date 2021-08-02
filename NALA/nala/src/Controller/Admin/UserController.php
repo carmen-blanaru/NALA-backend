@@ -18,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
  /**
      * @Route("/admin/utilisateurs", name="admin_user_", requirements={"id" = "\d+"})
-     * @IsGranted("ROLE_ADMIN")
+     * 
      */
 class UserController extends AbstractController
 {
@@ -37,7 +37,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/creation", name="create", methods={"GET", "POST"})
-     * @IsGranted("ROLE_SUPER_ADMIN")
+     * 
      * 
      * @return Response
      */
