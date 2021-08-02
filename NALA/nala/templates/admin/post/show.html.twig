@@ -15,7 +15,7 @@
 				<td>{{ post.id }}</td>
 			</tr>
             <tr>
-				<th>Title</th>
+				<th>Titre</th>
 				<td>{{ post.title }}</td>
 			</tr>
             <tr>
@@ -24,6 +24,11 @@
                 {% if post.display %} Oui
                 {% else %} Non
                 {% endif %}</td>
+			</tr>
+			<tr>
+				<th>Appartient à la catégorie</th>
+				<td>{{ post.category.name }}</td>
+			</tr>
             <tr>
 				<th>Date de création</th>
                 <td>{{ post.createdAt|date("d-m-Y")}}</td>
@@ -38,7 +43,7 @@
 				{% if post.picture %}
 				 	<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ post.picture) }}" style="max-width:250px;" >
 				{% else %}
-					<img src="data:image/jpg;base64, {{ post.pictureBase64 }}"style="max-width:250px;" ></img>
+					<img src="data:image/jpg;base64, {{ post.picture }}"style="max-width:250px;" ></img>
 				{% endif %}
 				</td>
 			</tr>            
