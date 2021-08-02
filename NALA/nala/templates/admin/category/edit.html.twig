@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Edition de catégorie{% endblock %}
+
+{% block content %}
+    <h1> Modifier une catégorie </h1>
+
+    {{ include('admin/category/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    {{ include('admin/category/_delete_form.html.twig') }}
+
+    <a href="{{ path('admin_category_list') }}" class="mt-3 text-decoration-none fst-italic text-info bg-dark w-25 text-center rounded-2"> Retour à la liste des catégories </a>
+{% endblock %}
