@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
 /**
  * @Route("/admin/post", name="admin_post_")
  */
@@ -80,17 +82,21 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="delete", methods={"GET","POST"})
+     * @Route("/{id}/delete", name="delete", methods={"GET", "POST"})
      *
      */
-    public function deletePost (Post $post, Request $request)
+    public function deletePost (Post $post, Request $request, CsrfTokenManagerInterface $csrfTokenManager)
     {
-        // if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
+        $submittedToken = $csrfTokenManager->getToken('delete-item')->getValue();
+      //  dd($submittedToken);
+         if ($this->isCsrfTokenValid('delete-item', $submittedToken)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($post);
             $entityManager->flush();
             return $this->redirectToRoute('admin_post_list');
-        // }
+         }else{
+             dd('je ne rentre pas dans le if');
+         }
  
         
     }    

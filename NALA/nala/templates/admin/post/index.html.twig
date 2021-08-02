@@ -52,7 +52,7 @@
 						<a href="{{ path('admin_post_show', {'id': postCurrent.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
 						<a href="{{ path('admin_post_edit', {'id': postCurrent.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a> 
 						{# We should secure this route with a Token #}
-						<a href="{{ path('admin_post_delete', {'id': postCurrent.id}) }}" class="btn btn-outline-danger btn-sm ms-2">Supprimer</a> 
+						<a class="ms-2 pb-0 btn btn-outline-danger btn-sm" href="{{ path('admin_post_delete', {'id': postCurrent.id, 'token': csrf_token('delete-item')}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette publication?');" role= "button"> Supprimer </a> 
 						
 					</td>
 				</tr>
