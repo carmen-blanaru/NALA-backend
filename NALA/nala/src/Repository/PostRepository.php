@@ -53,15 +53,15 @@ class PostRepository extends ServiceEntityRepository
         // server date seem to be US based so we need to add & day
         $today = date('Y-m-d h:i:s', strtotime("+1 days")); 
 
-        //dd(date('Y-m-d h:i:s'));
 
         return $this->createQueryBuilder('p')
-            ->select('p','COUNT(p.id) as countLike')
+            ->select('p.id','p.picture','p.title','p.display','p.createdAt','p.updatedAt','p.pictureBase64','c.name as categoryName','COUNT(p.id) as countLike',)
             ->innerJoin('p.userLike', 'u')
+            ->innerJoin('p.category', 'c')            
             ->where('p.createdAt >=:l7day and p.createdAt<= :today' )
             ->setParameter('today', $today)
             ->setParameter('l7day', $l7day)
-            ->groupBy('p.id')
+            ->groupBy('p')
             ->orderBy('countLike', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
