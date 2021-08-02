@@ -226,7 +226,7 @@ class ApiPostController extends AbstractController
     /**
      * EndPoint to remove a like in the database
      *
-     * @Route("/{id}/removelike/{userid}", name="add_like", methods={"PUT|PATCH"})
+     * @Route("/{id}/removelike/{userid}", name="remove_like", methods={"PUT|PATCH"})
      */
     public function remove_like($id, $userid, PostRepository $postRepository, UserRepository $userRepository, Request $request, ValidatorInterface $validator)
     {
