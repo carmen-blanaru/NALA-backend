@@ -24,7 +24,7 @@ class PostController extends AbstractController
     public function index(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request, PostRepository $postRepository): Response
     {
 
-        $dql   = "SELECT p.id, p.picture, p.title, p.display, p.createdAt, p.updatedAt, FROM App\Entity\Post p";
+        $dql   = "SELECT p.id, p.picture, p.title, p.display, p.createdAt, p.updatedAt FROM App\Entity\Post p";
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(
