@@ -13,9 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/admin/post", name="admin_post_")
+ * @IsGranted("ROLE_ADMIN")
  */
 
 class PostController extends AbstractController
@@ -83,9 +86,9 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="delete", methods={"GET", "POST"})
-     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
-    public function deletePost (Post $post, Request $request, CsrfTokenManagerInterface $csrfTokenManager)
+    public function deletePost (Post $post, CsrfTokenManagerInterface $csrfTokenManager)
     {
         $submittedToken = $csrfTokenManager->getToken('delete-item')->getValue();
       //  dd($submittedToken);
@@ -94,11 +97,8 @@ class PostController extends AbstractController
             $entityManager->remove($post);
             $entityManager->flush();
             return $this->redirectToRoute('admin_post_list');
-         }else{
-             dd('je ne rentre pas dans le if');
          }
- 
-        
+    
     }    
 
 }

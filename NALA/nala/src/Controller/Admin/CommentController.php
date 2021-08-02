@@ -9,9 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/admin/commentaires", name="admin_comment_", requirements={"id" = "\d+"})
+ * @IsGranted("ROLE_ADMIN")
  */
 class CommentController extends AbstractController
 {
@@ -57,6 +60,7 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function delete(Request $request, Comment $comment): Response
     {

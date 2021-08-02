@@ -9,14 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/admin/categorie", name="admin_category_", requirements={"id" = "\d+"})
+ * @IsGranted("ROLE_ADMIN")
  */
 class CategoryController extends AbstractController
 {
     /**
      * @Route("", name="list", methods={"GET"})
+     * 
      */
     public function listCategory(CategoryRepository $categoryRepository): Response
     {
@@ -27,6 +30,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/creation", name="new", methods={"GET","POST"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function newCategory(Request $request): Response
     {
@@ -50,6 +54,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
+     * 
      */
     public function show(Category $category): Response
     {
@@ -60,6 +65,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}/edition", name="edit", methods={"GET","POST"})
+     * 
      */
     public function edit(Request $request, Category $category): Response
     {
@@ -80,6 +86,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function delete(Request $request, Category $category): Response
     {

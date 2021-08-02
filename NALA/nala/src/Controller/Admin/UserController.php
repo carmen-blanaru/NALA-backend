@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 
  /**
      * @Route("/admin/utilisateurs", name="admin_user_", requirements={"id" = "\d+"})
+     * @IsGranted("ROLE_ADMIN")
      */
 class UserController extends AbstractController
 {
@@ -34,7 +37,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/creation", name="create", methods={"GET", "POST"})
-     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
+     * 
      * @return Response
      */
     public function newUser(Request $request, UserPasswordHasherInterface $passwordHasher, PictureUploader $pictureUploader)
@@ -129,6 +133,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function delete(Request $request, User $user): Response
     {
