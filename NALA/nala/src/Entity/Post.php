@@ -76,7 +76,7 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
-     * @Groups({"post","user"})
+     * @Groups({"post"})
      * 
      */
     private $userLike;
