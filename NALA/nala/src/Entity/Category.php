@@ -52,6 +52,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
      * @Groups({"category"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $posts;
 
