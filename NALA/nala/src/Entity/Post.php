@@ -62,6 +62,7 @@ class Post
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts",cascade={"persist"})
      * @Groups({"post"})
+     * 
      */
     private $category;
 
