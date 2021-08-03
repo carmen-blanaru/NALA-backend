@@ -22,7 +22,10 @@ use App\Service\UploaderBase64;
  * @Route("/api/v1/post", name="api_post_")
  */
 
+
+
 class ApiPostController extends AbstractController
+
 {
     private $em;
     public function __construct(EntityManagerInterface $entityManager)
@@ -38,7 +41,12 @@ class ApiPostController extends AbstractController
     public function index(PostRepository $postRepository): Response
     {
         $Post = $postRepository->findby([],['createdAt' => 'desc']);
-        // dd($Post);
+        
+        $picturePath = 'http://ec2-54-197-127-233.compute-1.amazonaws.com/uploads/pictures/';
+        foreach ($Post as $currentPost ):
+            $currentPost->setPicture($picturePath.$currentPost->getpicture());
+        endforeach;
+
         return $this->json($Post,200,[],[
                 'groups' => 'post'
             ]);
@@ -51,6 +59,10 @@ class ApiPostController extends AbstractController
     public function last10(PostRepository $postRepository): Response
     {
         $Post = $postRepository->findLast10();
+        $picturePath = 'http://ec2-54-197-127-233.compute-1.amazonaws.com/uploads/pictures/';
+        foreach ($Post as $currentPost ):
+            $currentPost->setPicture($picturePath.$currentPost->getpicture());
+        endforeach;
         // dd($Post);
         return $this->json($Post,200,[],[
                 'groups' => 'post'
@@ -65,6 +77,10 @@ class ApiPostController extends AbstractController
     public function lastten(PostRepository $postRepository): Response
     {
         $Post = $postRepository->findLast10();
+        $picturePath = 'http://ec2-54-197-127-233.compute-1.amazonaws.com/uploads/pictures/';
+        foreach ($Post as $currentPost ):
+            $currentPost->setPicture($picturePath.$currentPost->getpicture());
+        endforeach;
         // dd($Post);
         return $this->json($Post,200,[],[
                 'groups' => 'post'
@@ -79,6 +95,7 @@ class ApiPostController extends AbstractController
     {
         $Post = $postRepository->topLove();
         //dd($Post);
+        
         return $this->json($Post,200,[],[
                 'groups' => 'post'
             ]);
@@ -92,6 +109,10 @@ class ApiPostController extends AbstractController
     public function show($id, PostRepository $postRepository): Response
     {
         $Post = $postRepository->find($id);
+        $picturePath = 'http://ec2-54-197-127-233.compute-1.amazonaws.com/uploads/pictures/';
+        foreach ($Post as $currentPost ):
+            $currentPost->setPicture($picturePath.$currentPost->getpicture());
+        endforeach;
         // dd($Post);
         return $this->json($Post,200,[],[
                 'groups' => 'post'
