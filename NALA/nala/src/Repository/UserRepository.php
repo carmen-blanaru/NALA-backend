@@ -19,6 +19,19 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    // the request return one user and his posts
+    public function findPostByUser($id)
+    {
+      return $this->createQueryBuilder('u')
+            ->join('u.posts', 'p')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->addSelect('p')
+            ->getQuery()
+            ->getResult() 
+            ;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
