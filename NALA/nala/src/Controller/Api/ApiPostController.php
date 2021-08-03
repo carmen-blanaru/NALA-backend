@@ -37,7 +37,7 @@ class ApiPostController extends AbstractController
      */
     public function index(PostRepository $postRepository): Response
     {
-        $Post = $postRepository->findAll();
+        $Post = $postRepository->findby([],['createdAt' => 'desc']);
         // dd($Post);
         return $this->json($Post,200,[],[
                 'groups' => 'post'

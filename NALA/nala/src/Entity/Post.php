@@ -82,7 +82,6 @@ class Post
     
      /**
      * @ORM\Column(type="text", nullable=true)
-     * 
      */
     private $pictureBase64;
 
