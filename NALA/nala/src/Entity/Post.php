@@ -23,7 +23,7 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"user", "comment", "post"})
+     * @Groups({"user", "comment", "post", "category"})
      */
     private $picture;
 
@@ -47,7 +47,7 @@ class Post
 
     /**
      * @ORM\Column(type="datetime", nullable=true, columnDefinition="timestamp default current_timestamp on update current_timestamp")
-     * @Groups({"post"})
+     * @Groups({"post", "category"})
      */
     private $updatedAt;
 
@@ -81,7 +81,7 @@ class Post
     
      /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"post", "comment", "category"})
+     * 
      */
     private $pictureBase64;
 
