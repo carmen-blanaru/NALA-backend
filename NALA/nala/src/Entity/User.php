@@ -87,13 +87,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
      * @Groups({"user"})
-     * cascade={"persist"}
+     * 
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
      * @Groups({"user"})
      * @ORM\OrderBy({"createdAt" = "DESC"})
      */

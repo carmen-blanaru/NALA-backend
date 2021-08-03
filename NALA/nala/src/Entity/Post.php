@@ -52,7 +52,7 @@ class Post
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"post"})
      * cascade={"persist"}
@@ -60,7 +60,7 @@ class Post
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
      * @Groups({"post"})
      * 
      */
