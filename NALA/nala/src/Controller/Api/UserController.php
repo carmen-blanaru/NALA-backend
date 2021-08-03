@@ -26,19 +26,6 @@ class UserController extends AbstractController
         $this->em = $entityManager;
     }
 
-    /**
-     * @Route("/{id}/post", name="post", methods={"GET"})
-     *
-     * this path returns all the profil of one user and all his posts from the most recent to the former one  
-     */
-    public function userPost(int $id, UserRepository $userRepository)
-    {
-        $user = $userRepository->findPostByUser($id);
-        return $this->json($user, 200, [], [
-            // the response is in json format so it is importent to serialize the objects in naming groups 
-            'groups' => 'user',
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
