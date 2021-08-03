@@ -69,6 +69,7 @@ class Post
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
      * cascade={"persist"}
      * @Groups({"post"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $comment;
 
