@@ -17,14 +17,14 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"post", "category"})
+     * @Groups({"post", "category","user"})
      * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
-     * @Groups({"post", "category"})
+     * @Groups({"post", "category","user"})
      */
     private $name;
 
