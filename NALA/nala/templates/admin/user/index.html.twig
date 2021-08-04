@@ -5,7 +5,7 @@
 {% block content %}
 
 
-<div class="example-wrapper sm">
+<div class="example-wrapper sm col-sm-12">
 <a class="mt-2 mb-2 btn btn-outline-primary btn-lg" href="{{ path('admin_user_create')}}" role= "button"> Nouvel utilisateur </a>
     <h1> La liste des utilisateurs </h1>
         <table class="table text-center">
@@ -15,8 +15,6 @@
 				<th>Pseudo</th>
 				<th>Email</th>
 				<th>Roles</th>
-				<th>Prénom</th>
-				<th>Nom</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -27,9 +25,7 @@
                     <td>{{ user.nickname }}</td>
 					<td>{{ user.email }}</td>
 					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-					<td>{{ user.firstname }}</td>
-					<td>{{ user.lastname }}</td>
-					<td class="d-flex">
+					<td class="d-flex mt-3 pb-3">
 						<a href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-outline-success btn-sm">Afficher</a>
 						<a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-outline-warning btn-sm ms-2">Modifier</a>
 					</td>
