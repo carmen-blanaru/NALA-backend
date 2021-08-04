@@ -42,9 +42,9 @@
                     <td>
 
 						{% if postCurrent.picture %}
-							<img class="admin-product-image" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:150px;">
+							<img class="admin-product-image min-pic" src="{{ asset('uploads/pictures/' ~ postCurrent.picture) }}"  style="max-width:150px;">
 						{% else %}
-							<img src="data:image/jpg;base64, {{ postCurrent.picture }}" style="max-width:250px;" >
+							<img src="data:image/jpg;base64, {{ postCurrent.picture }}" >
 						{% endif %}
 
                     </td>
