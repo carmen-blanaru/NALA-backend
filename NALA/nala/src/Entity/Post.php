@@ -67,7 +67,7 @@ class Post
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post",orphanRemoval=true)
      * cascade={"persist"}
      * @Groups({"post"})
      * @ORM\OrderBy({"createdAt" = "DESC"})
@@ -75,7 +75,7 @@ class Post
     private $comment;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedPosts", orphanRemoval=true)
      * @Groups({"post"})
      * 
      */
