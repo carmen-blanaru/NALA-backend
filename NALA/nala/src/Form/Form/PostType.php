@@ -21,6 +21,10 @@ class PostType extends AbstractType
                 'label' => 'Affichage',
                 'attr' => ['class' => 'mb-3']
             ])
+            ->add('category', null, [
+                'label' => 'Catégorie',
+                'attr' => ['class' => 'form-control mb-3']
+            ])
 
         ;
     }
