@@ -2,7 +2,7 @@ a {
     color: #212529;
 }
 .min-pic{
-    width:150 px;
+    width:150px;
     height: 112px;
-    object-fit: contain;
+    object-fit: cover;
 }
