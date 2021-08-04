@@ -61,7 +61,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
-     * @Groups({"post"})
+     * @Groups({"post","user"})
      * 
      */
     private $category;
