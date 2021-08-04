@@ -1,0 +1,8 @@
+a {
+    color: #212529;
+}
+.min-pic{
+    width:150 px;
+    height: 112px;
+    object-fit: contain;
+}
